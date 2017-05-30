@@ -1,3 +1,11 @@
+.gitignore
+# 不正解のもの
 *TLE*
 *WA*
 *miss*
+# 書く用
+main.cpp
+Main.java
+Program.cs
+Program.php
+program.py
