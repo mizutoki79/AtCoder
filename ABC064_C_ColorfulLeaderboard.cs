@@ -14,88 +14,27 @@ class Program
         int[] a = Console.ReadLine().Split(' ')
                     .Select(elem => int.Parse(elem))
                     .ToArray();
-        bool existGrey = false, existBrown = false, existGreen = false, existLightBlue = false, existBlue = false, existYellow = false, existOrange = false, existRed = false;
-        int NumberOfFreeColorPerson = 0;
-        int cnt = 0;
+        const int NumOfColors = 8;
+        bool[] colors = new bool[NumOfColors];
+        int NumberOfFreeColor = 0;
         for (int i = 0; i < n; i++)
         {
-            if (a[i] <= 399) 
+            if (a[i] >= 3200) 
             {
-                if (!existGrey)
+                NumberOfFreeColor++;
+                continue;
+            }
+            for (int j = 0; j < NumOfColors; j++)
+            {
+                if (!colors[j] && 400 * j <= a[i] && a[i] < 400 * (j + 1))
                 {
-                existGrey = true; 
-                cnt++; 
-                Console.Error.WriteLine("grey");
+                    colors[j] = true;
                 }
             }
-            else if (a[i] <= 799) 
-            {
-                if (!existBrown)
-                {
-                existBrown = true; 
-                cnt++; 
-                Console.Error.WriteLine("brown");
-                }
-            }
-            else if (a[i] <= 1199) 
-            {
-                if (!existGreen)
-                {
-                existGreen = true; 
-                cnt++; 
-                Console.Error.WriteLine("green");
-                }
-            }
-            else if (a[i] <= 1599) 
-            {
-                if (!existLightBlue)
-                {
-                existLightBlue = true; 
-                cnt++; 
-                Console.Error.WriteLine("lblue");
-                }
-            }
-            else if (a[i] <= 1999) 
-            {
-                if (!existBlue)
-                {
-                existBlue = true; 
-                cnt++; 
-                Console.Error.WriteLine("blue");
-                }
-            }
-            else if (a[i] <= 2399) 
-            {
-                if (!existYellow)
-                {
-                existYellow = true; 
-                cnt++; 
-                Console.Error.WriteLine("yellow");
-                }
-            }
-            else if (a[i] <= 2799) 
-            {
-                if (!existOrange)
-                {
-                existOrange = true; 
-                cnt++; 
-                Console.Error.WriteLine("orange");
-                }
-            }
-            else if (a[i] <= 3199) 
-            {
-                if (!existRed)
-                {
-                existRed = true; 
-                cnt++; 
-                Console.Error.WriteLine("red");
-                }
-            }
-            else NumberOfFreeColorPerson++;
         }
-        int min = Math.Max(cnt, 1);
-        int max = min;
-        if (NumberOfFreeColorPerson != 0) max = NumberOfFreeColorPerson + cnt;
+        int cnt = colors.Where(elem => elem).Count();
+        int min = Math.Max(1, cnt);
+        int max = cnt + NumberOfFreeColor;
         Console.WriteLine("{0} {1}", min, max);
     }
 }
