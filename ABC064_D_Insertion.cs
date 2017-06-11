@@ -26,7 +26,7 @@ class Program
         Console.Write(s);
         for (int i = 0; i < opening; i++) Console.Write(')');
         Console.WriteLine();
-        // var result = new string(Enumerable.Concat(Enumerable.Concat(Enumerable.Repeat('(', closing).ToArray(), s), Enumerable.Repeat(')', opening).ToArray()).ToArray());
+        // var result = new string(Enumerable.Concat(Enumerable.Concat(Enumerable.Repeat('(', closing), s), Enumerable.Repeat(')', opening)).ToArray());
         // Console.WriteLine(result);
     }
 }
