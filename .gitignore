@@ -1,5 +1,7 @@
 .gitignore
 .vscode
+*.pdf
+*.exe
 # 不正解のもの
 *TLE*
 *WA*
