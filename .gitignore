@@ -3,9 +3,9 @@
 *.pdf
 *.exe
 # 不正解のもの
-*TLE*
-*WA*
-*miss*
+*_TLE*
+*_WA*
+*_miss*
 # 書く用
 main.cpp
 Main.java
@@ -16,3 +16,4 @@ program.py
 AtCoder.csproj
 \obj
 \bin
+*.obj
