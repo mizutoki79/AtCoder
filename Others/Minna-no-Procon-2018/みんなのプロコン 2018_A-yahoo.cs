@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AtCoder.minpro2018
+namespace AtCoder.minpro2018.A
 {
     class Program
     {
