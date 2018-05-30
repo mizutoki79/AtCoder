@@ -1,3 +1,4 @@
+using System;
 class Scanner
 {
     string[] s;
