@@ -18,22 +18,39 @@ namespace AtCoder.AGC026.B
             var queries = Enumerable.Range(0, T).Select(i => new { A = sc.NextLong(), B = sc.NextLong(), C = sc.NextLong(), D = sc.NextLong() });
             foreach (var query in queries)
             {
-                var next = query.A;
-                var memo = new HashSet<long>();
-                var isLoop = false;
-                while (true)
+                var A = query.A;
+                var B = query.B;
+                var C = query.C;
+                var D = query.D;
+                if (B > A)
                 {
-                    if (next >= query.B) next = next - (query.B * (next / query.B));
-                    else break;
-                    if (memo.Contains(next))
-                    {
-                        isLoop = true;
-                        break;
-                    }
-                    memo.Add(next);
-                    if (next <= query.C) next += query.D;
+                    Console.WriteLine("No");
+                    continue;
                 }
-                Console.WriteLine(isLoop ? "Yes" : "No");
+                else if (B > D)
+                {
+                    Console.WriteLine("No");
+                    continue;
+                }
+                else if (C >= B)
+                {
+                    Console.WriteLine("Yes");
+                    continue;
+                }
+                else
+                {
+                    var g = MathExtensions.Gcd(B, D);
+                    if (B - g + A % g > C)
+                    {
+                        Console.WriteLine("No");
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Yes");
+                        continue;
+                    }
+                }
             }
         }
     }
@@ -118,6 +135,20 @@ namespace AtCoder.AGC026.B
                 Array[i] = NextDecimal();
             }
             return Array;
+        }
+    }
+
+    static class MathExtensions
+    {
+        public static long Gcd(long a, long b)
+        {
+            var r = Math.Min(a, b);
+            while (a != b && r != 0)
+            {
+                if (a > b) r = a %= b;
+                else r = b %= a;
+            }
+            return Math.Max(a, b);
         }
     }
 }
