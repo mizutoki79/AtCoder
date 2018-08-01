@@ -18,37 +18,23 @@ namespace AtCoder.ABC103.D
             var m = sc.Nextint();
             var demands = Enumerable.Range(0, m).Select(i => new { A = sc.Nextint(), B = sc.Nextint() }).ToArray();
 
-            var bridgeCnt = new int[n + 1];
+            var maxRight = Enumerable.Repeat(n + 1, n).ToArray();
             foreach (var item in demands)
             {
-                bridgeCnt[item.A]++;
-                bridgeCnt[item.B]--;
+                maxRight[item.A] = Math.Min(maxRight[item.A], item.B);
             }
-
-            for (int i = 1; i < n + 1; i++)
+            var cnt = 0;
+            var r = n + 1;
+            for (int l = 1; l < n; l++)
             {
-                bridgeCnt[i] += bridgeCnt[i - 1];
-            }
-
-            var deleteOrder = bridgeCnt.Select((val, idx) => new { Value = val, Index = idx }).OrderByDescending(elem => elem.Value).Select(elem => elem.Index);
-            var doneDemands = new bool[m];
-            var result = 0;
-            foreach (var item in deleteOrder)
-            {
-                var isDelete = false;
-                for (int i = 0; i < m; i++)
+                r = Math.Min(maxRight[l], r);
+                if (r <= l + 1)
                 {
-                    if (doneDemands[i]) continue;
-                    if (demands[i].A <= item && item < demands[i].B)
-                    {
-                        isDelete = true;
-                        doneDemands[i] = true;
-                    }
+                    cnt++;
+                    r = n + 1;
                 }
-                if (isDelete) result++;
-                if (!doneDemands.Contains(false)) break;
             }
-            Console.WriteLine(result);
+            Console.WriteLine(cnt);
         }
     }
     class Scanner
