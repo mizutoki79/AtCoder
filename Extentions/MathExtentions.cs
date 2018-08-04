@@ -36,4 +36,9 @@ static class MathExtensions
         }
         return Math.Max(a, b);
     }
+
+    public static long Lcm(long a, long b)
+    {
+        return a * b / Gcd(a, b);
+    }
 }
