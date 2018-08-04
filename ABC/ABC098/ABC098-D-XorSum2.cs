@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-// Wrong Answer
+
 namespace AtCoder.ABC098.D
 {
     class Program
@@ -17,9 +17,9 @@ namespace AtCoder.ABC098.D
             var A = sc.Arrayint(n);
             var l = 0;
             var r = 0;
-            var xor = A[0];
-            var sum = A[0];
-            var count = 0;
+            var xor = (long) A[0];
+            var sum = (long) A[0];
+            var count = 0L;
             while (l < A.Length)
             {
                 while (xor == sum && r < A.Length)
