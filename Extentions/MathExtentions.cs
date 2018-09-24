@@ -9,8 +9,8 @@ static class MathExtensions
 {
     public static long Factorial(long n)
     {
-        long fact = n;
-        for (long i = n - 1; i >= 1; i--)
+        var fact = n;
+        for (var i = n - 1L; i >= 1L; i--)
         {
             fact *= i;
         }
@@ -19,10 +19,10 @@ static class MathExtensions
 
     public static long Combination(long n, long r)
     {
-        long molecule = 1;
-        for (long i = 0; i < r; i++) molecule *= n - i;
-        long denominator = 1;
-        for (long i = 1; i <= r; i++) denominator *= i;
+        var molecule = 1L;
+        for (var i = 0L; i < r; i++) molecule *= n - i;
+        var denominator = 1L;
+        for (var i = r; i > 0; i--) denominator *= i;
         return molecule / denominator;
     }
 
