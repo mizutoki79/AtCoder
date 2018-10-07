@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AtCoder.ABC112.
+namespace AtCoder.ABC112.D
 {
     class Program
     {
@@ -18,20 +18,12 @@ namespace AtCoder.ABC112.
 
             var quotient = m / n;
             var remainder = m % n;
-            var result = Gcd(quotient, remainder);
-
-            Console.WriteLine(result);
-        }
-
-        public static long Gcd(long a, long b)
-        {
-            var r = Math.Min(a, b);
-            while (a != b && r != 0)
+            while (remainder != 0 && ++n <= m)
             {
-                if (a > b) r = a %= b;
-                else r = b %= a;
+                quotient = m / n;
+                remainder = m % n;
             }
-            return Math.Max(a, b);
+            Console.WriteLine(quotient);
         }
     }
     class Scanner
