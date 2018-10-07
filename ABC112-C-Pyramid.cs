@@ -24,10 +24,13 @@ namespace AtCoder.ABC112.C
                 h[i] = sc.NextLong();
             }
 
+            var verifyIdxList = new List<int>();
+            var H = -1L;
             for (var cx = x.Min(); cx <= x.Max(); cx++)
+            {
                 for (var cy = y.Min(); cy <= y.Max(); cy++)
                 {
-                    var H = -1L;
+                    H = -1L;
                     // Console.Error.WriteLine($"({cx} {cy})");
                     for (var i = 0; i < n; i++)
                     {
@@ -38,19 +41,36 @@ namespace AtCoder.ABC112.C
                             if (H == -1L) H = tmpH;
                             else if (H != tmpH) break;
                         }
+                        else
+                        {
+                            verifyIdxList.Add(i);
+                        }
                         if (i == n - 1)
                         {
                             if (H == -1L) H = 0L;
-                            Console.WriteLine($"{cx} {cy} {H}");
-                            return;
+                            if (Verify(x, y, h, cx, cy, H, verifyIdxList))
+                            {
+                                Console.WriteLine($"{cx} {cy} {H}");
+                                return;
+                            }
                         }
                     }
                 }
+            }
         }
 
         static long HeightOfCenter(int x, int y, long h, int cx, int cy)
         {
             return h + Math.Abs(x - cx) + Math.Abs(y - cy);
+        }
+
+        static bool Verify(IEnumerable<int> x, IEnumerable<int> y, IEnumerable<long> h, int cx, int cy, long ch, IEnumerable<int> indexes)
+        {
+            foreach (var i in indexes)
+            {
+                if (h.ElementAt(i) != Math.Max(ch - Math.Abs(x.ElementAt(i) - cx) - Math.Abs(y.ElementAt(i) - cy), 0)) return false;
+            }
+            return true;
         }
     }
     class Scanner
