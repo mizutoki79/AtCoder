@@ -16,14 +16,22 @@ namespace AtCoder.ABC112.D
             var n = sc.Nextint();
             var m = sc.Nextint();
 
-            var quotient = m / n;
-            var remainder = m % n;
-            while (remainder != 0 && ++n <= m)
+            var maxGcd = 0;
+            for (int i = 1; i * i <= m; i++)
             {
-                quotient = m / n;
-                remainder = m % n;
+                var quotient = m / i;
+                var remainder = m % i;
+                if (remainder == 0)
+                {
+                    if (i < n)
+                    {
+                        if (quotient >= n) quotient = i;
+                        else continue;
+                    }
+                    maxGcd = Math.Max(maxGcd, quotient);
+                }
             }
-            Console.WriteLine(quotient);
+            Console.WriteLine(maxGcd);
         }
     }
     class Scanner
