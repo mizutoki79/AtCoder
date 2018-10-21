@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AtCoder.ABC109.A
+namespace AtCoder.ABC109.C
 {
     class Program
     {
