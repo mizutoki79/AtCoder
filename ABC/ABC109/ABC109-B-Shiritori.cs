@@ -15,15 +15,16 @@ namespace AtCoder.ABC109.B
             var sc = new Scanner();
             var n = sc.Nextint();
             var w = Enumerable.Range(0, n).Select(i => sc.Next()).ToArray();
-            var set = new HashSet<string>();
-            for (int i = 0; i < n - 1; i++)
+            var usedSet = new HashSet<string>();
+            usedSet.Add(w[0]);
+            for (int i = 1; i < n; i++)
             {
-                if (set.Contains(w[i]) || w[i].Last() != w[i + 1].First())
+                if (usedSet.Contains(w[i]) || w[i - 1].Last() != w[i].First())
                 {
                     Console.WriteLine("No");
                     return;
                 }
-                set.Add(w[i]);
+                usedSet.Add(w[i]);
             }
             Console.WriteLine("Yes");
         }
