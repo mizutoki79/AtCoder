@@ -1,17 +1,2 @@
-.gitignore
-.vscode
+*.gitignore*
 *.pdf
-*.exe
-# 不正解のもの
-# 書く用
-main.cpp
-Main.java
-Program.cs
-Program.php
-program.py
-## C#(.Net) 関連
-AtCoder.csproj
-\obj
-\bin
-*.obj
-rust_at_coder
