@@ -3,9 +3,6 @@
 *.pdf
 *.exe
 # 不正解のもの
-*_TLE*
-*_WA*
-*_miss*
 # 書く用
 main.cpp
 Main.java
