@@ -47,10 +47,10 @@ namespace AtCoder.ABC113.D
             Console.WriteLine(modPatterns[0, 0]);
         }
 
-        static long NumOfPatterns(int w, int a, int b = -1)
+        static long NumOfPatterns(int w, int a, int? b = null)
         {
-            if (b == -1) return Count(a) * Count(w - a - 1);
-            else return Count(Math.Min(a, b)) * Count(w - Math.Max(a, b) - 1);
+            if (b.HasValue) return Count(Math.Min(a, (int) b)) * Count(w - Math.Max(a, (int) b) - 1);
+            else return Count(a) * Count(w - a - 1);
         }
         static long Count(int num)
         {
