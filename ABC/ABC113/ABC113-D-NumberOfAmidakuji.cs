@@ -27,24 +27,37 @@ namespace AtCoder.ABC113.D
                     {
                         if (j == K)
                         {
-                            modPatterns[i, j] = (j != 0 && j != W - 1) ? W - 2 : W - 1;
+                            modPatterns[i, j] = NumOfPatterns(W, j);
                         }
-                        else if (Math.Abs(K - j) == 1)
+                        else if (Math.Abs(j - K) == 1)
                         {
-                            modPatterns[i, j] = 1;
+                            modPatterns[i, j] = NumOfPatterns(W, j, K);
                         }
                     }
                     else
                     {
-                        modPatterns[i, j] = ((j != 0 && j != W - 1) ? (W - 2) * modPatterns[i + 1, j] : (W - 1) * modPatterns[i + 1, j]) % mod;
-                        if (j != 0) modPatterns[i, j] += modPatterns[i + 1, j - 1];
-                        if (j != W - 1) modPatterns[i, j] += modPatterns[i + 1, j + 1];
-                        modPatterns[i, j] %= mod;
+                        modPatterns[i, j] = (NumOfPatterns(W, j)) * modPatterns[i + 1, j];
+                        if (j != 0) modPatterns[i, j] += NumOfPatterns(W, j, j - 1) * modPatterns[i + 1, j - 1];
+                        if (j != W - 1) modPatterns[i, j] += NumOfPatterns(W, j, j + 1) * modPatterns[i + 1, j + 1];
                     }
+                    modPatterns[i, j] %= mod;
                 }
             }
             if (modPatterns[0, 0] == 0) modPatterns[0, 0] = 1;
             Console.WriteLine(modPatterns[0, 0]);
+        }
+
+        static long NumOfPatterns(int w, int a, int b = -1)
+        {
+            if (b == -1) return Count(a) * Count(w - a - 1);
+            else return Count(Math.Min(a, b)) * Count(w - Math.Max(a, b) - 1);
+        }
+        static long Count(int num)
+        {
+            if (num <= 0) return 1L;
+            if (num == 1) return 1L;
+            if (num == 2) return 2L;
+            return Count(num - 1) + Count(num - 2);
         }
     }
 
