@@ -54,10 +54,20 @@ namespace AtCoder.ABC113.D
         }
         static long Count(int num)
         {
-            if (num <= 0) return 1L;
-            if (num == 1) return 1L;
-            if (num == 2) return 2L;
-            return Count(num - 1) + Count(num - 2);
+            return FibonacciSequence().Take(num + 2).Last();
+        }
+
+        public static IEnumerable<long> FibonacciSequence()
+        {
+            var a = 0L;
+            var b = 1L;
+            while (true)
+            {
+                yield return a;
+                yield return b;
+                a += b;
+                b += a;
+            }
         }
     }
 
