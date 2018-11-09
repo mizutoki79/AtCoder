@@ -84,4 +84,17 @@ static class MathExtensions
             return value * ModPow(value, power - 1, divisor) % divisor;
         }
     }
+
+    public static IEnumerable<long> FibonacciSequence()
+    {
+        var a = 0L;
+        var b = 1L;
+        while (true)
+        {
+            yield return a;
+            yield return b;
+            a += b;
+            b += a;
+        }
+    }
 }
