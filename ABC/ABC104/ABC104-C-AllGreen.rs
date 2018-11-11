@@ -73,7 +73,6 @@ fn main() {
                 score += (i + 1) * 100 * pc[i].0 + pc[i].1;
                 count += pc[i].0;
             }
-            eprintln!("{} {} {}", i, score, count);
         }
         if score < g {
             continue;
@@ -89,7 +88,6 @@ fn main() {
                 score -= (i + 1) * 100;
                 count -= 1;
                 remain -= 1;
-                eprintln!("{} {} {}", score, count, remain);
             }
             if score >= g {
                 continue;
