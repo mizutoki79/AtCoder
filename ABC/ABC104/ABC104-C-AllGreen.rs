@@ -69,7 +69,7 @@ fn main() {
         let mut score = 0;
         let mut count = 0;
         for i in 0..d {
-            if complete_flag & (i + 1) != 0 {
+            if complete_flag & 1 << i != 0 {
                 score += (i + 1) * 100 * pc[i].0 + pc[i].1;
                 count += pc[i].0;
             }
@@ -89,11 +89,11 @@ fn main() {
                 count -= 1;
                 remain -= 1;
             }
-            if score >= g {
-                continue;
-            }
+            score += (i + 1) * 100;
             count += 1;
-            min = cmp::min(min, count);
+            if score >= g {
+                min = cmp::min(min, count);
+            }
         }
     }
     println!("{}", min);
