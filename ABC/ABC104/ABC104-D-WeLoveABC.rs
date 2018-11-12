@@ -116,12 +116,14 @@ fn main() {
                 // }
                 let power = l_count_table[&'?'];
                 let power1 = if power > 0 { power - 1 } else { 0 };
-                let l_current_count = l_count_table[&'A'] * 3usize.pow(power as u32)
-                    + power * 3usize.pow(power1 as u32);
+                let l_current_count = l_count_table[&'A'] * mod_pow(3, power as u32, divisor)
+                    % divisor
+                    + power * mod_pow(3, power1 as u32, divisor) % divisor;
                 let power = r_count_table[&'?'];
                 let power1 = if power > 0 { power - 1 } else { 0 };
-                let r_current_count = r_count_table[&'C'] * 3usize.pow(power as u32)
-                    + power * 3usize.pow(power1 as u32);
+                let r_current_count = r_count_table[&'C'] * mod_pow(3, power as u32, divisor)
+                    % divisor
+                    + power * mod_pow(3, power1 as u32, divisor) % divisor;
                 // eprintln!("lcurr: {}", l_current_count);
                 // eprintln!("rcurr: {}", r_current_count);
                 total_count += (l_current_count % divisor) * (r_current_count % divisor);
@@ -135,4 +137,16 @@ fn main() {
         }
     }
     println!("{}", total_count);
+}
+
+fn mod_pow(value: usize, power: u32, divisor: usize) -> usize {
+    if power == 0 {
+        1usize
+    } else if power % 2 == 0 {
+        let half_power = power / 2;
+        let half_result = mod_pow(value, half_power, divisor);
+        half_result * half_result % divisor
+    } else {
+        value * mod_pow(value, power - 1, divisor) % divisor
+    }
 }
