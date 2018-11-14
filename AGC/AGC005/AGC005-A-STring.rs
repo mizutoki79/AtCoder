@@ -62,39 +62,15 @@ fn main() {
     input!{
         x: chars,
     }
-    let mut prev_v;
-    let mut prev_i;
-    let mut curr_v = x[0];
-    let mut curr_i = 0;
-    let mut leng = x.len();
-    let mut removed = vec![false; leng];
-    for (i, &ch) in x.iter().enumerate() {
-        prev_v = curr_v;
-        prev_i = curr_i;
-        curr_v = ch;
-        curr_i = i;
-        if prev_v == 'S' && curr_v == 'T' {
-            leng -= 2;
-            removed[prev_i] = true;
-            removed[curr_i] = true;
-            let curr = removed
-                .iter()
-                .enumerate()
-                .filter(|&(idx, _)| idx < i)
-                .rev()
-                .skip_while(|&(_, &flag)| flag)
-                .next();
-            if let Some(curr) = curr {
-                curr_i = curr.0;
-                curr_v = x[curr_i];
-            }
+    let mut length = x.len();
+    let mut stack = Vec::new();
+    for ch in x {
+        if ch == 'T' && stack.last() == Some(&'S') {
+            length -= 2;
+            stack.pop();
+        } else {
+            stack.push(ch);
         }
-        for (i, &ch) in x.iter().enumerate() {
-            if !removed[i] {
-                eprint!("{}", ch);
-            }
-        }
-        eprintln!();
     }
-    println!("{}", leng);
+    println!("{}", length);
 }
