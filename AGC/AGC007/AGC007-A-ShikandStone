@@ -76,7 +76,7 @@ fn main() {
             }
             if i < h - 1 && j < w - 1 {
                 if !passed[i][j] {
-                    println!("Impossible");
+                    println!("Impossible0");
                     return;
                 }
                 if a[i + 1][j] == '#' && a[i][j + 1] != '#' {
@@ -86,21 +86,23 @@ fn main() {
                     passed[i][j + 1] = true;
                     continue;
                 } else {
-                    println!("Impossible");
+                    println!("Impossible1");
                     return;
                 }
             } else if i < h - 1 {
-                if a[i + 1][j] == '#' && passed[i + 1][j] {
+                if a[i + 1][j] == '#' {
+                    passed[i + 1][j] = true;
                     continue;
                 } else {
-                    println!("Impossible");
+                    println!("Impossible2");
                     return;
                 }
             } else if j < w - 1 {
-                if a[i][j + 1] == '#' && passed[i][j + 1] {
+                if a[i][j + 1] == '#' {
+                    passed[i][j + 1] = true;
                     continue;
                 } else {
-                    println!("Impossible");
+                    println!("Impossible3");
                     return;
                 }
             }
