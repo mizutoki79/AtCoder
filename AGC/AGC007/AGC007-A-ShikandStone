@@ -74,11 +74,11 @@ fn main() {
             if a[i][j] == '.' {
                 continue;
             }
+            if !passed[i][j] {
+                println!("Impossible");
+                return;
+            }
             if i < h - 1 && j < w - 1 {
-                if !passed[i][j] {
-                    println!("Impossible");
-                    return;
-                }
                 if a[i + 1][j] == '#' && a[i][j + 1] != '#' {
                     passed[i + 1][j] = true;
                     continue;
