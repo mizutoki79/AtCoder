@@ -64,23 +64,44 @@ fn main() {
         w: usize,
         a: [chars;h],
     }
+    let mut passed = vec![vec![false; w]; h];
     'outer: for i in 0..h {
-        'inner: for j in 0..w {
+        for j in 0..w {
             if i == h - 1 && j == w - 1 {
                 break 'outer;
             }
             if a[i][j] == '.' {
-                continue 'inner;
+                continue;
             }
-            if (a.get(i + 1).unwrap_or(&vec!['.'; 1]).get(j) == Some(&'#')
-                && a[i].get(j + 1).or(Some(&'.')) != Some(&'#'))
-                || (a[i].get(j + 1) == Some(&'#')
-                    && a.get(i + 1).unwrap_or(&vec!['.'; 1]).get(j).or(Some(&'.')) != Some(&'#'))
-            {
-                continue 'inner;
-            } else {
-                println!("Impossible");
-                return;
+            if i < h - 1 && j < w - 1 {
+                if !passed[i][j] {
+                    println!("Impossible");
+                    return;
+                }
+                if a[i + 1][j] == '#' && a[i][j + 1] != '#' {
+                    passed[i + 1][j] = true;
+                    continue;
+                } else if a[i + 1][j] != '#' && a[i][j + 1] == '#' {
+                    passed[i][j + 1] = true;
+                    continue;
+                } else {
+                    println!("Impossible");
+                    return;
+                }
+            } else if i < h - 1 {
+                if a[i + 1][j] == '#' && passed[i + 1][j] {
+                    continue;
+                } else {
+                    println!("Impossible");
+                    return;
+                }
+            } else if j < w - 1 {
+                if a[i][j + 1] == '#' && passed[i][j + 1] {
+                    continue;
+                } else {
+                    println!("Impossible");
+                    return;
+                }
             }
         }
     }
