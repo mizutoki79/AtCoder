@@ -65,6 +65,7 @@ fn main() {
         a: [chars;h],
     }
     let mut passed = vec![vec![false; w]; h];
+    passed[0][0] = true;
     'outer: for i in 0..h {
         for j in 0..w {
             if i == h - 1 && j == w - 1 {
