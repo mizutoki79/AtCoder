@@ -63,30 +63,33 @@ fn main() {
         n: usize,
         m: usize,
         q: usize,
-        lr: [(usize1, usize1);m],
-        pq: [(usize1, usize1);q],
+        lr: [(usize, usize);m],
+        pq: [(usize, usize);q],
     }
-    let mut l_list = vec![HashSet::new(); n];
-    let mut r_list = vec![HashSet::new(); n];
-    for (i, &(l, r)) in lr.iter().enumerate() {
-        // eprintln!("{} {} {}", i, l, r);
-        for j in 0..l + 1 {
-            l_list[j].insert(i);
-            // eprintln!("list[{}]: {:?}", j, l_list[j]);
-        }
-        for j in r..n {
-            r_list[j].insert(i);
-            // eprintln!("list[{}]: {:?}", j, r_list[j]);
+    let mut table = vec![vec![0; n + 1]; n + 1];
+    for (l, r) in lr {
+        table[l][r] += 1;
+    }
+    // for i in 0..n + 1 {
+    //     eprintln!("{:?}", table[i]);
+    // }
+    // eprintln!();
+    for i in 1..n + 1 {
+        for j in 1..n + 1 {
+            table[i][j] += table[i][j - 1];
         }
     }
+    for i in 1..n + 1 {
+        for j in 1..n + 1 {
+            table[i][j] += table[i - 1][j];
+        }
+    }
+    // for i in 0..n + 1 {
+    //     eprintln!("{:?}", table[i]);
+    // }
+    // eprintln!();
     for (p, q) in pq {
-        //     eprintln!("{} {}", p, q);
-        //     eprintln!("{:?} {:?}", l_list[p], r_list[q]);
-        let result = l_list[p].intersection(&r_list[q]);
-        // for x in result {
-        //     eprint!("{} ", x);
-        // }
-        // eprintln!();
-        println!("{}", result.into_iter().count());
+        let result = table[q][q] + table[p - 1][p - 1] - table[p - 1][q] - table[q][p - 1];
+        println!("{}", result);
     }
 }
