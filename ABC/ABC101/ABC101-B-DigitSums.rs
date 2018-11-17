@@ -60,17 +60,11 @@ macro_rules! read_value {
 
 fn main() {
     input!{
-        n: chars,
+        n: String,
     }
-    let num = n
-        .iter()
-        .clone()
-        .map(|c| c.to_string())
-        .collect::<String>()
-        .parse::<usize>()
-        .unwrap();
+    let num = n.parse::<usize>().unwrap();
     let mut s_num = 0;
-    for ch in n {
+    for ch in n.chars() {
         s_num += ch.to_string().parse::<usize>().unwrap();
     }
     println!("{}", if num % s_num == 0 { "Yes" } else { "No" });
