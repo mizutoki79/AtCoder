@@ -26,6 +26,6 @@ for i in 0 .. K - 1 do
             haveSweets.[A.[i, j] - 1] <- true
 eprintfn "%A" haveSweets
 haveSweets
-    |> Seq.filter (fun has -> not has)
+    |> Seq.filter not
     |> Seq.length
     |> printfn "%d"
